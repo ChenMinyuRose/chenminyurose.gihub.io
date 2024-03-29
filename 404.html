@@ -10,5 +10,16 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      (function() {
+        // 检查这个请求是否是由于直接访问一个非根路径引起的404
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          // 使用history.replaceState来修正URL路径
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </body>
 </html>
